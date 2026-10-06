@@ -1,0 +1,12 @@
+{
+  "upgrades": [
+    {
+      "id": "cat_swift_1",
+      "familiar": "cat",
+      "stat": "MoveSpeed",
+      "modification": "PercentageInc",
+      "value": 0.2,
+      "descriptionKey": "Cat moves faster"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>ModManager</AssemblyName>
+    <RootNamespace>ModManagerCore</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <DebugType>none</DebugType>
+
+    <!-- change these paths to match your setup -->
+    <GamePath>C:\Program Files (x86)\Steam\steamapps\common\The Magus Circle</GamePath>
+    <ManagedPath>$(GamePath)\The Magus Circle_Data\Managed</ManagedPath>
+    <BepInExPath>$(GamePath)\BepInEx\core</BepInExPath>
+    <DeployPath>$(GamePath)\BepInEx\plugins\ModManager</DeployPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx"><HintPath>$(BepInExPath)\BepInEx.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(BepInExPath)\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine"><HintPath>$(ManagedPath)\UnityEngine.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ManagedPath)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(ManagedPath)\UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule"><HintPath>$(ManagedPath)\UnityEngine.JSONSerializeModule.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <!-- copy DLL to BepInEx/plugins/ModManager after build (if Program Files doesn't allow writing, run IDE as Administrator or copy manually) -->
+  <Target Name="Deploy" AfterTargets="Build">
+    <MakeDir Directories="$(DeployPath)" ContinueOnError="true" />
+    <Copy SourceFiles="$(OutputPath)ModManager.dll" DestinationFolder="$(DeployPath)" ContinueOnError="true" />
+  </Target>
+
+</Project>
